@@ -1,0 +1,54 @@
+version: "3.9"
+
+volumes:
+  mysql_data:
+      driver: local
+
+networks:
+  my-collection:
+
+services:
+  front:  
+    build:
+      context: ./front
+    ports:
+      - 3000:3000
+    stdin_open: true
+    volumes:
+       - ./front:/front:cached
+       - /front/node_modules
+  db-keycloak:
+    image: mariadb:latest
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"] 
+    networks:
+      - my-collection
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - 8089:8080
+    environment:
+      DB_VENDOR: mariadb
+      DB_ADDR: db-keycloakb
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+    command:
+      - start-dev
+    restart: unless-stopped
+    depends_on:
+      - db-keycloak
+    networks:
+      - my-collection
+    
+  

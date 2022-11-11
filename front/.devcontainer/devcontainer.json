@@ -1,0 +1,7 @@
+{ 
+  "name": "front my-collection",
+  "dockerComposeFile": ["../../docker-compose.yaml"],
+  "service": "front",
+  "workspaceFolder": "/usr/src/app",
+  "shutdownAction": "stopCompose"
+}
