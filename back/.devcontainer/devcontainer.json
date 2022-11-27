@@ -1,0 +1,24 @@
+{
+  "name": "back my-collection",
+  "dockerComposeFile": [
+    "../../docker-compose.yaml"
+  ],
+  "service": "back",
+  "workspaceFolder": "/back",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "DavidAnson.vscode-markdownlint",
+    "ms-azuretools.vscode-docker",
+    "ms-azure-devops.azure-pipelines",
+    "shengchen.vscode-checkstyle",
+    "pivotal.vscode-spring-boot",
+    "vscjava.vscode-spring-boot-dashboard",
+    "GabrielBB.vscode-lombok"
+  ],
+  "features": {
+    "gradle": "latest"
+  },
+  "remoteUser": "vscode"
+
+}
