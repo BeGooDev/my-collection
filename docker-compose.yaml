@@ -25,6 +25,7 @@ services:
        - ./back:/back:cached
     depends_on:
       - db
+      - keycloak
   db:
     image: mariadb:latest
     volumes:

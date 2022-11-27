@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /api
+spring:
+    datasource:
+        url: jdbc:mariadb://${DB_HOSTNAME}:${DB_PORT}/mycollection
+        username: mycollection
+        password: password
+        driver-class-name: org.mariadb.jdbc.Driver
+        ddl-auto: update
+
+keycloak:
+  auth-server-url: http://${KEYCLOAK_HOSTNAME:localhost}:${KEYCLOAK_PORT:8089}
+  realm: mycollection
+  resource: login-app
+  public-client: true
+  bearer-only: true
+  credentials:
+    secret: ${KEYCLOAK_SECRET}
